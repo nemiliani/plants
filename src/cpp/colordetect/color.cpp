@@ -37,15 +37,16 @@ void threshold(int, void*){
 
 }
 
+void save_callback(int state, void* userdata){
+}
+
 int main( int argc, char** argv ){
 
     /// Load an image
     imgOriginal = imread( argv[1], 1 );
     namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
 
-    
-
-    //Create trackbars in "Control" window
+        //Create trackbars in "Control" window
 
     //Hue (0 - 179)
     createTrackbar("LowH", "Control", &iLowH, 179, threshold);
@@ -58,6 +59,8 @@ int main( int argc, char** argv ){
     //Value (0 - 255)
     createTrackbar("LowV", "Control", &iLowV, 255, threshold); 
     createTrackbar("HighV", "Control", &iHighV, 255, threshold);
+
+    createButton( "Control", save_callback, NULL, CV_PUSH_BUTTON, 0);
 
     //Convert the captured frame from BGR to HSV
     cvtColor(imgOriginal, imgHSV, COLOR_BGR2HSV); 
